@@ -1,2 +1,2 @@
-# nine-mens-morris
-Data Structures and Algorithms Project (Nine men's morris) 
+# Nine Men's Morris game
+Data Structures and Algorithms Project (Nine men's morris)
