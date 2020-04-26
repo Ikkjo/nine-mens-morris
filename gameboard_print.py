@@ -88,14 +88,14 @@ def pretty_game_board(board_state, yellow_background=False):
     return ansi_ylw_start + first_half + middle + second_half + ansi_ylw_end
 
 
-if __name__ == '__main__':
-    pos_dict = {'l': '□', 'm': '●', 'r': 'o'}
-
-    board_state = [pos_dict for row in range(8)]# [["●" for position in range(3)] for row in range(7)]
-
-    board_state[0]['m'] = 'o'
-
-    board_state[1]['m'].replace('●', '□')
-
-
-    print(pretty_game_board(board_state))
+# if __name__ == '__main__':
+#
+#     pos_dict = {'l': 'W', 'm': '●', 'r': 'B'}
+#
+#     board_state = [pos_dict for row in range(8)]# [["●" for position in range(3)] for row in range(7)]
+#
+#
+#     board_state[1]['m'].replace('●', '□')
+#
+#
+#     print(pretty_game_board(board_state))
