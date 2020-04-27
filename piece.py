@@ -2,9 +2,9 @@ class Piece(object):
 
     possible_pieces = ("B", "W")
 
-    def __init__(self, player):
+    def __init__(self, player, position=None):
         self.piece = self.possible_pieces[player]
-        self.position
+        self.position = position
         self._next_position = {"right": None, "left": None,
                      "up": None, "down": None}
 
@@ -14,7 +14,7 @@ class Piece(object):
     @property
     def right(self):
         return self._next_position["right"]
-
+    # setters for properties maybe redundant
     @right.setter
     def right(self, new_right_piece):
         self._next_position["right"] = new_right_piece

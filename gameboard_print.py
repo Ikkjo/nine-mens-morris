@@ -33,32 +33,32 @@ def three_rows(board_state, symmetry):
 
         narrow_row = board_state[2]
 
-        wide = wide_3(wide_row['l'], wide_row['m'], wide_row['r']) + '\n' +\
+        wide = wide_3(wide_row[0], wide_row[1], wide_row[2]) + '\n' +\
                (between_wide + '\n')* 2
 
-        medium = medium_3(medium_row['l'], medium_row['m'], medium_row['r']) + '\n' +\
+        medium = medium_3(medium_row[0], medium_row[1], medium_row[2]) + '\n' +\
                  (between_medium + '\n') * 2
 
-        narrow = narrow_3(narrow_row['l'], narrow_row['m'], narrow_row['r']) + '\n' +\
+        narrow = narrow_3(narrow_row[0], narrow_row[1], narrow_row[2]) + '\n' +\
                  (between_narrow + '\n') * 2
 
     else:
-        wide_row = board_state[5]
+        wide_row = board_state[7]
 
         medium_row = board_state[6]
 
-        narrow_row = board_state[7]
+        narrow_row = board_state[5]
 
         wide = (between_wide + '\n') * 2 +\
-               wide_3(wide_row['l'], wide_row['m'], wide_row['r']) + '\n'
+               wide_3(wide_row[0], wide_row[1], wide_row[2]) + '\n'
 
 
         medium = (between_medium + '\n') * 2 +\
-                 medium_3(medium_row['l'], medium_row['m'], medium_row['r']) + '\n'
+                 medium_3(medium_row[0], medium_row[1], medium_row[2]) + '\n'
 
 
         narrow = (between_narrow + '\n') * 2 +\
-                 narrow_3(narrow_row['l'], narrow_row['m'], narrow_row['r']) + '\n'
+                 narrow_3(narrow_row[0], narrow_row[1], narrow_row[2]) + '\n'
 
     return wide + medium + narrow if not symmetry else narrow + medium + wide
 
@@ -68,16 +68,12 @@ def middle_row(board_state):
 
     right = board_state[4]
 
-    middle = middle_left(left['l'], left['m'], left['r']) + middle_right(right['l'], right['m'], right['r']) + '\n'
+    middle = middle_left(left[0], left[1], left[2]) + middle_right(right[0], right[1], right[2]) + '\n'
 
     return middle
 
 
-def pretty_game_board(board_state, yellow_background=False):
-
-    ansi_ylw_start = '\033[43m' if yellow_background else ''
-
-    ansi_ylw_end = '\033[0m' if yellow_background else ''
+def pretty_game_board(board_state):
 
     first_half = three_rows(board_state, symmetry=False)
 
@@ -85,17 +81,17 @@ def pretty_game_board(board_state, yellow_background=False):
 
     second_half = three_rows(board_state, symmetry=True)
 
-    return ansi_ylw_start + first_half + middle + second_half + ansi_ylw_end
+    return first_half + middle + second_half
 
 
 # if __name__ == '__main__':
 #
-#     pos_dict = {'l': 'W', 'm': '●', 'r': 'B'}
+#     pos_dict = {0: 'W', 1: '●', 2: 'B'}
 #
 #     board_state = [pos_dict for row in range(8)]# [["●" for position in range(3)] for row in range(7)]
 #
 #
-#     board_state[1]['m'].replace('●', '□')
+#     board_state[1][1].replace('●', '□')
 #
 #
 #     print(pretty_game_board(board_state))
