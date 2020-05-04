@@ -1,5 +1,5 @@
-from gameboard_print import pretty_game_board
-from piece import Piece
+from interface.gameboard_print import pretty_game_board
+from modules.piece import Piece
 
 # TODO: Make Gameboard a singleton class
 
