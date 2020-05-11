@@ -2,8 +2,8 @@ class Piece(object):
 
     possible_pieces = ("B", "W")
 
-    def __init__(self, player, position=None):
-        self.piece = self.possible_pieces[player]
+    def __init__(self, color, position=None):
+        self.piece = self.possible_pieces[color]
         self.position = position
         self._next_position = {"right": None, "left": None,
                      "up": None, "down": None}
@@ -56,10 +56,10 @@ class Piece(object):
             p_type (str): type of the piece, can either be "corner", "connecting" or "border"
         """
         check = list()
-        check.append(self.next["right"])
-        check.append(self.next["left"])
-        check.append(self.next["up"])
-        check.append(self.next["down"])
+        check.append(self._next_position["right"])
+        check.append(self._next_position["left"])
+        check.append(self._next_position["up"])
+        check.append(self._next_position["down"])
 
         unavailable_pos = 0
 
