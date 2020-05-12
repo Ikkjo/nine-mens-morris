@@ -1,8 +1,6 @@
 from interface.gameboard_print import pretty_game_board
 from modules.singleton_metaclass import Singleton
-
-
-# TODO: Make Gameboard a singleton class
+from modules.position import Position
 
 
 class Gameboard(object, metaclass=Singleton):
@@ -11,17 +9,25 @@ class Gameboard(object, metaclass=Singleton):
     _max_rows = 8
 
     def __init__(self):
-        state = []
+        state = list()
         for row in range(self.max_rows):
-            pos = []
+            pos = list()
             for column in range(self.max_columns):
                 pos.append(Position(row, column))
             state.append(pos)
 
-        self.state = state
+        initialised_state = self._set_pos_refs()
+
+        self.state = initialised_state
 
     def __str__(self):
         return pretty_game_board(self.state)
+
+    @staticmethod
+    def _set_pos_refs(state: list):
+        None
+
+        return initialised_state
 
     @property
     def num_of_positions(self):
@@ -34,13 +40,3 @@ class Gameboard(object, metaclass=Singleton):
     @property
     def max_rows(self):
         return self._max_rows
-
-class Position(object):
-
-    def __init__(self, row, column, piece=None):
-        self.piece = piece if piece is not None else "●"
-        self.row = row
-        self.column = column
-
-    def __str__(self):
-        return self.piece
