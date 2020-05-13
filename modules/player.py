@@ -1,20 +1,43 @@
 from modules.piece import Piece
 
-
-class HumanPlayer(object):
-
+class Player(object):
     starting_pieces = 9
 
-    def __init__(self, color: int):
-        piece_list = list()
+    def __init__(self, color: str):
+        pieces = list()
 
         for piece in range(self.starting_pieces):
+            pieces.append(Piece(color))
 
-            piece_list.append(Piece(color))
-
-        self.pieces_unused_list = piece_list
+        self.unused_pieces = pieces
         self.piece_list = list()
 
     @property
     def pieces_left(self):
-        return len(self.piece_list) + len(self.pieces_unused_list)
+        return len(self.piece_list) + len(self.unused_pieces)
+
+
+
+class HumanPlayer(Player):
+
+    def __init__(self, color):
+        super().__init__(color)
+
+
+class BotPlayer(Player):
+
+    def __init__(self, color):
+        super().__init__(color)
+
+
+if __name__ == '__main__':
+    h = HumanPlayer('W')
+    b = BotPlayer('B')
+
+    for i in range(Player.starting_pieces):
+        bot_piece = h.unused_pieces[i]
+        human_piece = b.unused_pieces[i]
+        print(bot_piece, human_piece)
+        assert isinstance(bot_piece, Piece) and (human_piece, Piece)
+
+

@@ -4,7 +4,8 @@ from interface.starting_menu import starting_menu
 
 def game():
     clear_screen()
-    starting_menu()
+    mode = starting_menu()
+    play_game(mode)
 
 
 

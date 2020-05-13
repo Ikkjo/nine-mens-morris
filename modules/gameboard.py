@@ -16,7 +16,7 @@ class Gameboard(object, metaclass=Singleton):
                 pos.append(Position(row, column))
             state.append(pos)
 
-        initialised_state = self._set_pos_refs()
+        initialised_state = self._set_pos_refs(state)
 
         self.state = initialised_state
 
@@ -25,9 +25,8 @@ class Gameboard(object, metaclass=Singleton):
 
     @staticmethod
     def _set_pos_refs(state: list):
-        None
 
-        return initialised_state
+        return init_position_refs(state)
 
     @property
     def num_of_positions(self):
