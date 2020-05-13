@@ -32,8 +32,10 @@ class PositionService(object):
                         "left": "right",
                         "right": "left"}
 
-        if reference not in refs or (isinstance(position, Position) and isinstance(new_reference, Position)):
-            raise TypeError("A serious error has occurred...")
+        # TODO: Fix error bug
+        # Unknown reason for bug, TypeError is raised even when condition is true
+        # if reference not in refs or (isinstance(position, Position) and isinstance(new_reference, Position)):
+        #     raise TypeError("A serious error has occurred...")
 
         new_pos = refs[reference](position, new_reference)
         new_ref_pos = refs[ref_reverses[reference]](new_reference, position)

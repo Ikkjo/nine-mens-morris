@@ -1,9 +1,9 @@
 class Position(object):
 
     def __init__(self, row, column, piece=None):
-        self.piece = piece if piece is not None else "●"
         self.row = row
         self.column = column
+        self.piece = piece if piece is not None else "●"
         self._next_position = {"right": None, "left": None,
                                "up": None, "down": None}
 

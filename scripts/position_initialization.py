@@ -2,7 +2,6 @@ from services.position_service import PositionService
 
 
 def init_position_refs(state: list):
-
     return refs(state)
 
 
@@ -16,7 +15,6 @@ def refs(state):
 
 
 def make_refs(state, pos: tuple, relations: dict):
-
     final_state = state
     for relation in relations.keys():
         final_state = new_ref(final_state, pos, relations[relation], relation)
@@ -25,7 +23,6 @@ def make_refs(state, pos: tuple, relations: dict):
 
 
 def new_ref(state, pos, ref, relation):
-
     pos_row = pos[0]
     pos_col = pos[1]
 
@@ -63,8 +60,8 @@ def init_relations_4():
 
     return [relations_1_1, relations_3_1, relations_4_1, relations_6_1]
 
-def init_relations_square():
 
+def init_relations_square():
     relations_0_0 = [(0, 0), {"down": (3, 0),
                               "right": (0, 1)}]
 
@@ -91,4 +88,3 @@ def init_relations_square():
 
     return [relations_0_0, relations_0_2, relations_7_0, relations_7_2,
             relations_2_0, relations_2_2, relations_5_0, relations_5_2]
-
