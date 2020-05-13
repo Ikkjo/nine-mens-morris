@@ -47,20 +47,3 @@ class Qu(object):
             raise EmptyQueueException
 
         return self._queue[-1]
-
-
-
-# if __name__ == '__main__':
-#     q = Queue()
-#     q.enqueue(1)
-#     q.enqueue(2)
-#     q.enqueue("#@")
-#     q.enqueue("#$%^YHVF")
-#
-#     first_in_q = q.dequeue()
-#     second_in_q = q.dequeue()
-#     third_in_q = q.dequeue()
-#     print("First:", first_in_q)
-#     print(q)
-
-
