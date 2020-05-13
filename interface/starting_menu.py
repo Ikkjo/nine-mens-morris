@@ -32,7 +32,7 @@ def starting_menu():
 
         mode = input(">>>")
         if exit(mode):
-            break
+            return None
 
         if mode in options:
             return options[mode]
