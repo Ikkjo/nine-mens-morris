@@ -19,8 +19,6 @@ def piece_chooser_menu():
             return option
 
 
-
-
 def print_piece_options():
     print("|>{:^60}<|".format("Choose your preffered piece color") +
           "\n\n" + "{:^60}".format("B - Black") + "\n\n"
