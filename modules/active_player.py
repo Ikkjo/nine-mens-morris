@@ -8,6 +8,8 @@ class ActivePlayer(object, metaclass=Singleton):
 
     def __str__(self):
         return str(self.player)
+
+
 if __name__ == '__main__':
     active = ActivePlayer("p1")
     active.player = "p2"

@@ -4,28 +4,17 @@ from modules.singleton_metaclass import Singleton
 
 class PlayerRepo(object, metaclass=Singleton):
 
-    def __init__(self, *args):
+    def __init__(self, player1, player2):
+        self._player1 = player1
+        self._player2 = player2
 
-        if len(args) != 2 or len(args) != 1 or len(args) != 0:
-            raise SyntaxError("Argument mismatch in initialization of PlayerRepo")
-
-        self._players = list()
-
-        for arg in args:
-            if isinstance(arg, Player) and len(args) == 2:
-                self.players.append(arg)
-
-            elif isinstance(arg, list) and len(args) == 1:
-                self.players.extend(arg)
+    def players(self):
+        return [self._player1, self._player2]
 
     @property
-    def players(self):
-        return self._players
+    def player1(self):
+        return self._player1
 
-    def add_player(self, player):
-
-        if len(self._players) > 2:
-            return False
-
-        self._players.append(player)
-        return True
+    @property
+    def player2(self):
+        return self._player2

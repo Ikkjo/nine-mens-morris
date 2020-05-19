@@ -1,3 +1,4 @@
+from modules.gameboard import Gameboard
 
 
 def next_move_menu():
@@ -12,3 +13,7 @@ def position_input():
 
 def piece_input():
     return input("Unesite poziciju figure koju zelite da pomerite\n>>>\n\n")
+
+
+def show_gameboard():
+    print(Gameboard())

@@ -22,13 +22,22 @@ class HumanPlayer(Player):
 
     def __init__(self, color):
         super().__init__(color)
+        self._type = "human"
+
+    @property
+    def type(self):
+        return self._type
 
 
 class BotPlayer(Player):
 
     def __init__(self, color):
         super().__init__(color)
+        self._type = "bot"
 
+    @property
+    def type(self):
+        return self._type
 
 if __name__ == '__main__':
     h = HumanPlayer('W')
