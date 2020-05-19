@@ -1,4 +1,5 @@
-
+from scripts.initial_phase import initial_phase
+from scripts.move_phase import move_phase
 from scripts.initialize_game import initialize_game
 
 
@@ -15,7 +16,7 @@ def play_game(mode: str):
 
 
 
-def move_phase
+
 
 
 
