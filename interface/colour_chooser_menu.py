@@ -1,7 +1,8 @@
-from interface.exit_check import exit
 from interface.clear_screen import clear_screen
+from interface.exit_check import exit
 
-def piece_chooser_menu():
+
+def colour_chooser_menu():
     valid_options = {"B", "W", "R"}
 
     while True:

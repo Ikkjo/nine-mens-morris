@@ -1,9 +1,9 @@
-from interface.piece_chooser_menu import piece_chooser_menu
+from interface.colour_chooser_menu import colour_chooser_menu
 from modules.coin import toss
 
 
 def choose_piece_color():
-    option = piece_chooser_menu()
+    option = colour_chooser_menu()
 
     if option is None:
         return

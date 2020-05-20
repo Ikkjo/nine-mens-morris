@@ -1,4 +1,5 @@
 from modules.player import HumanPlayer, BotPlayer
+from interface.colour_chooser_menu import colour_chooser_menu
 from repos.player_repo import PlayerRepo
 
 
@@ -45,10 +46,14 @@ class PlayerService(object):
 
     @staticmethod
     def _piece_to_move(player):
+        moving_piece = colour_chooser_menu()
+        if moving_piece is None:
+            print()
         pass
 
     @staticmethod
     def _position_to_move(player):
+
         pass
 
     @staticmethod
