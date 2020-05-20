@@ -4,7 +4,7 @@ from modules.singleton_metaclass import Singleton
 
 class PlayerRepo(object, metaclass=Singleton):
 
-    def __init__(self, player1, player2):
+    def __init__(self, player1: Player, player2: Player):
         self._player1 = player1
         self._player2 = player2
 

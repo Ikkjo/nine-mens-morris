@@ -57,3 +57,7 @@ class PlayerService(object):
     @staticmethod
     def _position_to_move(player):
         pass
+
+
+# TODO: _piece_to_move
+# TODO: _position_to_move

@@ -16,6 +16,10 @@ class Player(object):
     def pieces_left(self):
         return len(self.piece_list) + len(self.unused_pieces)
 
+    @property
+    def has_unused_pieces(self):
+        return len(self.unused_pieces) != 0
+
 
 
 class HumanPlayer(Player):
