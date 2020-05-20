@@ -23,4 +23,4 @@ def choose_random():
 
 
 def second_player_piece_color(first_player_piece_color):
-    return "W" if first_player_piece_color is "B" else "B"
+    return "W" if first_player_piece_color == "B" else "B"

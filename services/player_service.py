@@ -18,9 +18,6 @@ class PlayerService(object):
         elif player_type == "bot":
             player = BotPlayer(color)
 
-        p_repo = PlayerRepo()
-        p_repo.add_player(player)
-
         return True
 
     @staticmethod
