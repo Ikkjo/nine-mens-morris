@@ -10,6 +10,7 @@ class Position(object):
     def __str__(self):
         return self.piece
 
+
     @property
     def right(self):
         return self._next_position["right"]

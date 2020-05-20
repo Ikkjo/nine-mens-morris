@@ -25,25 +25,18 @@ class PlayerService(object):
         return PlayerService.new_player(mode, second_player_color)
 
     @staticmethod
-    def next_move(player):
-        player_type = PlayerService._get_player_type(player)
+    def next_move(active_player, move_mode):
+        player_type = active_player.type
 
         successful = False
 
-        if player == "human":
-            successful = PlayerService._human_next_move(player)
+        if player_type == "human":
+            successful = PlayerService._human_next_move(active_player, move_mode)
 
-
-        elif player == "bot":
-            successful = PlayerService._bot_next_move(player)
+        elif player_type == "bot":
+            successful = PlayerService._bot_next_move(active_player, move_mode)
 
         return successful
-
-
-    @staticmethod
-    def _get_player_type(player):
-        player_type = type(player)
-        return "human" if player_type == "HumanPlayer" else "bot"
 
     @staticmethod
     def _human_next_move(player):
@@ -58,6 +51,9 @@ class PlayerService(object):
     def _position_to_move(player):
         pass
 
+    @staticmethod
+    def _bot_next_move(player, move_mode):
+        pass
 
 # TODO: _piece_to_move
 # TODO: _position_to_move

@@ -1,4 +1,4 @@
-from modules.gameboard import Gameboard
+from services.gameboard_service import GameboardService
 
 
 def next_move_menu():
@@ -16,4 +16,7 @@ def piece_input():
 
 
 def show_gameboard():
-    print(Gameboard())
+    print(GameboardService().gameboard)
+
+if __name__ == '__main__':
+    show_gameboard()
