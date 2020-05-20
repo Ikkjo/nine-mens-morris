@@ -21,7 +21,7 @@ def colour_chooser_menu():
 
 
 def print_piece_options():
-    print("|>{:^60}<|".format("Choose your preffered piece color") +
+    print("|>{:^60}<|".format("Choose your preferred piece color") +
           "\n\n" + "{:^60}".format("B - Black") + "\n\n"
                    "{:^60}".format("W - White") + "\n\n"
                    "{:^60}".format("R - I don't know, toss a coin! (Random)") + "\n\n\n\n"

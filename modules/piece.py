@@ -14,7 +14,7 @@ class Piece(object):
         """
         if color not in self.piece_colors:
             raise TypeError("Invalid piece color!")
-        self._piece = color
+        self._piece_color = color
 
         self.position = None
 
@@ -22,5 +22,5 @@ class Piece(object):
         return self._piece
 
     @property
-    def piece(self):
-        return self._piece
+    def piece_color(self):
+        return self._piece_color

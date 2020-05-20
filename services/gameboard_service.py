@@ -22,11 +22,11 @@ class GameboardService(object):
 
     def set_piece_to_pos(self, row, column, piece):
         self.check_pos_index(row, column)
-        self.gameboard.state[row][column] = piece
+        self.gameboard.state[row][column].piece_color = piece
 
     def get_piece_from_pos(self, row, column):
         self.check_pos_index(row, column)
-        return self.gameboard.state[row][column]
+        return self.gameboard.state[row][column].piece.piece_color
 
 
 if __name__ == '__main__':

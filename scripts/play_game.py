@@ -11,14 +11,3 @@ def play_game(mode: str):
     winner = move_phase()
 
     return winner
-
-
-
-
-
-
-
-
-
-
-

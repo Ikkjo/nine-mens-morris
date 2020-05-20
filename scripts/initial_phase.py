@@ -6,8 +6,7 @@ from services.state_checker import StateChecker
 
 
 def initial_phase():
-    return
-    while initial_is_finished():
+    while initial_is_not_finished():
         play_init()
 
 
@@ -19,14 +18,14 @@ def play_init():
     change_active_player()
 
 
-def initial_is_finished():
+def initial_is_not_finished():
     player1 = PlayerRepo().player1
     player2 = PlayerRepo().player2
 
     if player1.has_unused_pieces or player2.has_unused_pieces:
-        return False
-    else:
         return True
+    else:
+        return False
 
 
 def new_mill():

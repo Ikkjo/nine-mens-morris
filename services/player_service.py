@@ -41,7 +41,7 @@ class PlayerService(object):
 
     @staticmethod
     def _human_next_move(player):
-        piece_to_move = PlayerService._piece_to_move(player)
+        piece_to_move = PlayerService._piece_to_move()
         position_to_move = PlayerService._position_to_move()
 
     @staticmethod

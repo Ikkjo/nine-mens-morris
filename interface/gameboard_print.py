@@ -5,23 +5,23 @@ between_medium = f"{'|':<7}{'|':<14}|{'|':>14}{'|':>7}"
 between_narrow = f"{'|':<7}{'|':<7}{'|':<14}{'|':<7}{'|':<7}|"
 
 def wide_3(l, m, r):
-    return f"{l.piece:—<21}{m.piece}{r.piece:—>21}"
+    return f"{l.piece_color:—<21}{m.piece_color}{r.piece_color:—>21}"
 
 
 def medium_3(l, m, r):
-    return f"{'|':<7}{l.piece:—<14}{m.piece}{r.piece:—>14}{'|':>7}"
+    return f"{'|':<7}{l.piece_color:—<14}{m.piece_color}{r.piece_color:—>14}{'|':>7}"
 
 
 def narrow_3(l, m, r):
-    return f"{'|':<7}{'|':<7}{l.piece:—<7}{m.piece}{r.piece:—>7}{'|':>7}{'|':>7}"
+    return f"{'|':<7}{'|':<7}{l.piece_color:—<7}{m.piece_color}{r.piece_color:—>7}{'|':>7}{'|':>7}"
 
 
 def middle_left(l, m, r):
-    return f"{l.piece:—<7}{m.piece}{r.piece:—>7}{' ':13}"
+    return f"{l.piece_color:—<7}{m.piece_color}{r.piece_color:—>7}{' ':13}"
 
 
 def middle_right(l, m, r):
-    return f"{l.piece:—<7}{m.piece}{r.piece:—>7}"
+    return f"{l.piece_color:—<7}{m.piece_color}{r.piece_color:—>7}"
 
 
 def three_rows(board_state, symmetry):
