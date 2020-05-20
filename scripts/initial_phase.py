@@ -8,11 +8,15 @@ from services.state_checker import StateChecker
 def initial_phase():
     return
     while initial_is_finished():
-        active_player = ActivePlayer().player
-        next_move(active_player, "INIT")
-        if new_mill():
-            next_move(active_player, "MILL")
-        change_active_player()
+        play_init()
+
+
+def play_init():
+    active_player = ActivePlayer().player
+    next_move(active_player, "INIT")
+    if new_mill():
+        next_move(active_player, "MILL")
+    change_active_player()
 
 
 def initial_is_finished():
