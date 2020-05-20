@@ -11,7 +11,7 @@ def choose_piece_color():
     elif option == "R":
         return choose_random()
 
-    else:
+    elif option == "W" or option == "B":
         return option
 
 

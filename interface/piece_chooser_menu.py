@@ -10,7 +10,7 @@ def piece_chooser_menu():
 
         print_piece_options()
 
-        option = input(">>>")
+        option = input(">>>").upper()
 
         if exit(option):
             return None
