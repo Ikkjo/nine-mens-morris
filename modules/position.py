@@ -4,45 +4,17 @@ class Position(object):
         self.row = row
         self.column = column
         self.piece = piece if piece is not None else "●"
-        self._next_position = {"right": None, "left": None,
-                               "up": None, "down": None}
+        self.right = None
+        self.up = None
+        self.left = None
+        self.down = None
 
     def __str__(self):
         return self.piece
 
-
     @property
-    def right(self):
-        return self._next_position["right"]
-
-    # setters for properties maybe redundant
-    @right.setter
-    def right(self, new_right_reference):
-        self._next_position["right"] = new_right_reference
-
-    @property
-    def left(self):
-        return self._next_position["left"]
-
-    @left.setter
-    def left(self, new_left_reference):
-        self._next_position["left"] = new_left_reference
-
-    @property
-    def up(self):
-        return self._next_position["up"]
-
-    @up.setter
-    def up(self, new_up_reference):
-        self._next_position["up"] = new_up_reference
-
-    @property
-    def down(self):
-        return self._next_position["down"]
-
-    @down.setter
-    def down(self, new_down_reference):
-        self._next_position["down"] = new_down_reference
+    def next(self):
+        return {"up": self.up, "down": self.down, "left": self.left, "right": self.right}
 
     # Method below (piece_type) may not be needed
 
