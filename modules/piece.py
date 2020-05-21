@@ -19,7 +19,7 @@ class Piece(object):
         self.position = None
 
     def __str__(self):
-        return self._piece
+        return self._piece_color
 
     @property
     def piece_color(self):
