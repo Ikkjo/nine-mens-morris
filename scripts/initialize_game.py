@@ -18,6 +18,6 @@ def make_players(mode):
     second_player_colour = second_player_piece_color(first_player_colour)
 
     player1 = PlayerService.new_player("human", first_player_colour)
-    player2 = PlayerService.second_player(mode, second_player_colour)
+    player2 = PlayerService.new_player(mode, second_player_colour)
 
     PlayerRepo(player1, player2)

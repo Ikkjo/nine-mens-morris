@@ -28,6 +28,9 @@ class GameboardService(object):
         self.check_pos_index(row, column)
         return self.gameboard.state[row][column].piece.piece_color
 
+    def get_gameboard_state(self):
+        return self.gameboard.state
+
     def is_next(self, piece, row, column):
         piece_pos = piece.position
 

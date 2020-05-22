@@ -3,7 +3,7 @@ class Position(object):
     def __init__(self, row, column, piece=None):
         self.row = row
         self.column = column
-        self.piece = piece if piece is not None else "●"
+        self.piece = piece if piece is not None else "o"
         self.right = None
         self.up = None
         self.left = None

@@ -8,7 +8,9 @@ def play(play_mode, finishing_condition):
         clear_screen()
         draw_gameboard()
         mill = play_mode()
+        winner = None
         if mill:
-            play_mill()
+            winner = play_mill()
         change_active_player()
+        return winner
 
