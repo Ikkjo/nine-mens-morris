@@ -12,5 +12,6 @@ def play(play_mode, finishing_condition):
         if mill:
             winner = play_mill()
         change_active_player()
-        return winner
+
+    return winner
 

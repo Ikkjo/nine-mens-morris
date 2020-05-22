@@ -1,5 +1,6 @@
 from modules.player import HumanPlayer, BotPlayer
-from interface.colour_chooser_menu import colour_chooser_menu
+from repos.active_player import ActivePlayer
+from services.gameboard_service import GameboardService
 from repos.player_repo import PlayerRepo
 
 
@@ -33,3 +34,11 @@ class PlayerService(object):
                    "G1": (7,0), "G4": (7,1), "G7": (7,2),}
 
         return row_map[user_input]
+
+    @staticmethod
+    def place_piece(row, column):
+        active_player = ActivePlayer().player
+        piece = active_player.unused_pieces.pop()
+        GameboardService().set_piece_to_pos(row, column, piece)
+
+

@@ -10,7 +10,7 @@ class Position(object):
         self.down = None
 
     def __str__(self):
-        return self.piece
+        return str(self.piece)
 
     @property
     def next(self):

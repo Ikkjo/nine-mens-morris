@@ -1,19 +1,13 @@
-from scripts.position_format import check_input
+from interface.human_init_menu import init_menu
+from services.player_service import PlayerService
 
 
 def human_init():
-    while True:
-        position = input("Where do you want to put your piece? ([A-G][1-7])\n>>>")
-        try:
-            position = check_input(position)
-            return position
+    position = init_menu()
+    row = position[0]
+    column = position[1]
+    PlayerService.place_piece(row, column)
 
-        except TypeError:
-            print("Input doesn't match format!")
 
-        except IndexError:
-            print("You can't put your piece there!")
 
-        except ValueError:
-            print("That position is occupied!")
 
