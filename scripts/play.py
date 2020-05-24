@@ -1,12 +1,15 @@
 from interface.clear_screen import clear_screen
+from interface.display_active_player import display_active_player
 from interface.draw_gameboard import draw_gameboard
 from scripts.change_active_player import change_active_player
 from scripts.play_mill import play_mill
+
 
 def play(play_mode, finishing_condition):
     while finishing_condition():
         clear_screen()
         draw_gameboard()
+        display_active_player()
         mill = play_mode()
         winner = None
         if mill:
@@ -14,4 +17,3 @@ def play(play_mode, finishing_condition):
         change_active_player()
 
     return winner
-
