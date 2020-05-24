@@ -1,6 +1,6 @@
 from services.state_checker import StateChecker
 from services.gameboard_service import GameboardService
 
-def check_new_mill():
+def check_new_mill(last_moved_position):
     gameboard_state = GameboardService().gameboard.state
-    return StateChecker.check_mills(gameboard_state)
+    return StateChecker.check_mills(gameboard_state, last_moved_position)

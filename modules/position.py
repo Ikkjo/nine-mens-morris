@@ -12,13 +12,23 @@ class Position(object):
     def __str__(self):
         return str(self.piece)
 
+    def __eq__(self, other):
+        if isinstance(other, Position):
+            return False
+        return self.piece == other.piece
+
+    def __ne__(self, other):
+        if isinstance(other, Position):
+            return True
+        return self.piece != other.piece
+
     @property
     def next(self):
         return {"up": self.up, "down": self.down, "left": self.left, "right": self.right}
 
     # Method below (piece_type) may not be needed
-
-    def piece_type(self):
+    @property
+    def position_type(self):
         """Method for defining piece type
 
         If the piece type is "connecting" that means it is adjacent to 4 positions on the board and can directly move

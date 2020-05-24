@@ -7,6 +7,7 @@ def human_init():
     row = position[0]
     column = position[1]
     PlayerService.place_piece(row, column)
+    return position
 
 
 
