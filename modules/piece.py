@@ -21,6 +21,12 @@ class Piece(object):
     def __str__(self):
         return self._piece_color
 
+    def __eq__(self, other):
+        return self._piece_color == other.piece_color
+
+    def __ne__(self, other):
+        return self._piece_color != other.piece_color
+
     @property
     def piece_color(self):
         return self._piece_color
