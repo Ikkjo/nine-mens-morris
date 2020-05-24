@@ -9,6 +9,7 @@ class Player(object):
         for piece in range(self.starting_pieces):
             pieces.append(Piece(color))
 
+        self._piece_color = color
         self.unused_pieces = pieces
         self.piece_list = list()
 
@@ -19,6 +20,10 @@ class Player(object):
     @property
     def has_unused_pieces(self):
         return len(self.unused_pieces) != 0
+
+    @property
+    def piece_color(self):
+        return self._piece_color
 
 
 

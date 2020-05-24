@@ -5,13 +5,17 @@ class ActivePlayer(object, metaclass=Singleton):
 
     def __init__(self, active_player):
         self.player = active_player
+        self._piece_color = active_player.piece_color
 
     def __str__(self):
         return str(self.player)
 
+    @property
+    def piece_color(self):
+        return self._piece_color
 
-if __name__ == '__main__':
-    active = ActivePlayer("p1")
-    active.player = "p2"
-    ActivePlayer("p1")  # ne moze ovako da se promeni vrednost
-    assert str(active) == "p2"
+# if __name__ == '__main__':
+#     active = ActivePlayer("p1")
+#     active.player = "p2"
+#     ActivePlayer("p1")  # ne moze ovako da se promeni vrednost
+#     assert str(active) == "p2"
