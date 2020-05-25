@@ -1,2 +1,5 @@
+from scripts.mill_phase import mill_phase
+
+
 def play_mill():
-    pass
+    mill_phase()

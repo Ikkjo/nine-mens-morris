@@ -14,13 +14,15 @@ class Position(object):
 
     def __eq__(self, other):
         if isinstance(other, Position):
+            return self.piece == other.piece
+        else:
             return False
-        return self.piece == other.piece
 
     def __ne__(self, other):
         if isinstance(other, Position):
+            return self.piece != other.piece
+        else:
             return True
-        return self.piece != other.piece
 
     @property
     def next(self):
@@ -41,10 +43,10 @@ class Position(object):
             p_type (str): type of the piece, can either be "corner", "connecting" or "border"
         """
         check = list()
-        check.append(self._next_position["right"])
-        check.append(self._next_position["left"])
-        check.append(self._next_position["up"])
-        check.append(self._next_position["down"])
+        check.append(self.right)
+        check.append(self.up)
+        check.append(self.left)
+        check.append(self.down)
 
         unavailable_pos = 0
 

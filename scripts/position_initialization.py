@@ -65,8 +65,8 @@ def init_relations_square():
     relations_0_0 = [(0, 0), {"down": (3, 0),
                               "right": (0, 1)}]
 
-    relations_0_2 = [(0, 2), {"down": (2, 1),
-                              "left": (1, 0)}]
+    relations_0_2 = [(0, 2), {"down": (4, 2),
+                              "left": (0, 1)}]
 
     relations_7_0 = [(7, 0), {"up": (3, 0),
                               "right": (7, 1)}]

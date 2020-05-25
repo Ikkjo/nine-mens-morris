@@ -23,13 +23,21 @@ class Piece(object):
 
     def __eq__(self, other):
         if isinstance(other, Piece):
+            return self._piece_color == other.piece_color
+        elif isinstance(other, str):
+            return self._piece_color == other
+        else:
             return False
-        return self._piece_color == other.piece_color
+
 
     def __ne__(self, other):
         if isinstance(other, Piece):
+            return self._piece_color != other.piece_color
+        elif isinstance(other, str):
+            return self._piece_color != other
+        else:
             return True
-        return self._piece_color != other.piece_color
+
 
     @property
     def piece_color(self):

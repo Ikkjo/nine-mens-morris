@@ -38,7 +38,7 @@ class PositionService(object):
         #     raise TypeError("A serious error has occurred...")
 
         new_pos = refs[reference](position, new_reference)
-        new_ref_pos = refs[ref_reverses[reference]](new_reference, position)
+        new_ref_pos = refs[ref_reverses[reference]](new_reference, new_pos)
 
         ret_val = (new_pos, new_ref_pos)
 

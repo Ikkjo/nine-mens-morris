@@ -39,21 +39,24 @@ class PlayerService(object):
     def place_piece(row, column):
         active_player = ActivePlayer().player
         piece = active_player.unused_pieces.pop()
+
         GameboardService().set_piece_to_pos(row, column, piece)
+
+        piece.position = GameboardService().gameboard.state[row][column]
         active_player.piece_list.append(piece)
 
     @staticmethod
     def mill_remove(row, column):
         active_player = ActivePlayer().player
         players = PlayerRepo()
-        gameboard = GameboardService().gameboard
+        gbs = GameboardService()
 
-        gameboard.set_piece_to_pos(row, column, "o")
+        gbs.set_piece_to_pos(row, column, "o")
 
         if active_player == players.player1:
-            return PlayerService._remove_piece(players.player2, gameboard.state, row, column)
+            return PlayerService._remove_piece(players.player2, gbs.gameboard.state, row, column)
         else:
-            return PlayerService._remove_piece(players.player1, gameboard.state, row, column)
+            return PlayerService._remove_piece(players.player1, gbs.gameboard.state, row, column)
 
 
 
@@ -66,9 +69,10 @@ class PlayerService(object):
         piece_counter = 0
         removed = False
 
-        while not removed or piece_counter == len(player.piece_list):
+        while not removed or piece_counter < len(player.piece_list):
             if player.piece_list[piece_counter].position == gameboard_state[row][column]:
                 del player.piece_list[piece_counter]
                 removed = True
+            piece_counter += 1
 
         return removed

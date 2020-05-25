@@ -1,4 +1,5 @@
 from services.gameboard_service import GameboardService
+from repos.active_player import ActivePlayer
 
 
 class StateChecker(object):
@@ -26,9 +27,9 @@ class StateChecker(object):
 
         for next_position in next_pos.keys():
             adjacent = next_pos[next_position]
-            if adjacent == position:
+            if position == adjacent:
                 next_adjacent = adjacent.next[next_position]
-                if next_adjacent.piece == position.piece:
+                if position == next_adjacent:
                     mill = True
 
         return mill
@@ -88,18 +89,40 @@ class StateChecker(object):
 
     @staticmethod
     def _clear_invalid_positions(position_dict):
+        return_dict = {}
         for next_position in position_dict.keys():
-            if next_position is None:
-                del position_dict[next_position]
+            if position_dict[next_position] is not None:
+                return_dict[next_position] = position_dict[next_position]
 
-        return position_dict
+        return return_dict
 
+    @staticmethod
+    def is_remove_legal(row, column):
+        legal = True
+        active_player = ActivePlayer().player
+        gameboard_state = GameboardService().gameboard.state
 
+        if not StateChecker.is_position_occupied(row, column):
+            legal = False
 
+        if StateChecker.is_piece_color_equal(gameboard_state, row, column, active_player.piece_color):
+            legal = False
 
+        if StateChecker.is_piece_in_mill(gameboard_state, row, column):
+            legal = False
 
+        return legal
 
     @staticmethod
     def is_position_occupied(row, column):
         board_state = GameboardService().get_gameboard_state()
         return board_state[row][column].piece != 'o'
+
+    @staticmethod
+    def is_piece_in_mill(gameboard_state, row: int, column: int):
+        position = (row, column)
+        return StateChecker.check_mills(gameboard_state, position)
+
+    @staticmethod
+    def is_piece_color_equal(gameboard_state, row, column, piece_color):
+        return gameboard_state[row][column] == piece_color
