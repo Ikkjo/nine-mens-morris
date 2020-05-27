@@ -5,14 +5,15 @@ class ActivePlayer(object, metaclass=Singleton):
 
     def __init__(self, active_player):
         self.player = active_player
-        self._piece_color = active_player.piece_color
 
     def __str__(self):
         return str(self.player)
 
     @property
     def piece_color(self):
-        return self._piece_color
+        return self.player.piece_color
+
+
 
 # if __name__ == '__main__':
 #     active = ActivePlayer("p1")

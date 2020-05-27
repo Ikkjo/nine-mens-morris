@@ -70,7 +70,7 @@ class StateChecker(object):
                     if position.up == position and position.down == position:
                         return True
 
-            elif direction_axis[direction] == 2:
+            elif direction_axis[direction] == 1:
                 if direction == "horizontal":
                     for dir in ["left", "right"]:
                         if dir in next_pos:
@@ -108,7 +108,7 @@ class StateChecker(object):
         if StateChecker.is_piece_color_equal(gameboard_state, row, column, active_player.piece_color):
             legal = False
 
-        if StateChecker.is_piece_in_mill(gameboard_state, row, column):
+        if StateChecker.is_piece_in_mill(gameboard_state, row, column) and not active_player.number_of_pieces_in_mill == active_player.pieces_left:
             legal = False
 
         return legal
@@ -126,3 +126,39 @@ class StateChecker(object):
     @staticmethod
     def is_piece_color_equal(gameboard_state, row, column, piece_color):
         return gameboard_state[row][column] == piece_color
+
+    @staticmethod
+    def is_active_players_piece(piece):
+        gbs = GameboardService()
+        piece = gbs.get_piece_from_pos(piece[0], piece[1])
+        piece_color = ActivePlayer().player.piece_color
+        return piece == piece_color
+
+    @staticmethod
+    def is_next(position1, position2):
+        found = False
+        next_position = position1.next
+        for direction in next_position.keys():
+            if next_position[direction] == position2:
+                found = True
+
+        return found
+
+
+    @staticmethod
+    def is_move_legal(piece, position):
+        legal = False
+        gbstate = GameboardService().get_gameboard_state()
+        piece = gbstate[piece[0]][piece[1]]
+        position = gbstate[position[0]][position[1]]
+        fly_mode = ActivePlayer().player.fly_mode
+
+        if fly_mode:
+            if not StateChecker.is_position_occupied(position):
+                legal = True
+
+        elif not fly_mode:
+            if StateChecker.is_next(piece, position) and not StateChecker.is_position_occupied(position):
+                legal = True
+
+        return legal

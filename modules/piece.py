@@ -29,7 +29,6 @@ class Piece(object):
         else:
             return False
 
-
     def __ne__(self, other):
         if isinstance(other, Piece):
             return self._piece_color != other.piece_color
@@ -37,7 +36,6 @@ class Piece(object):
             return self._piece_color != other
         else:
             return True
-
 
     @property
     def piece_color(self):

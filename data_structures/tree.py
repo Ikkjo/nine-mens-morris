@@ -1,4 +1,4 @@
-from qu import Qu
+from data_structures.qu import Qu
 
 
 class TreeNode(object):
@@ -49,10 +49,10 @@ class TreeNode(object):
 
 class Tree(object):
 
-    def __init__(self, root=None):
+    def __init__(self, root_data=None):
 
-        self._root = root
-        self._length = 0 if root is None else 1
+        self._root = TreeNode(data=root_data)
+        self._length = 1
 
     def __len__(self):
         return self._length

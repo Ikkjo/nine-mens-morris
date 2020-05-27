@@ -31,8 +31,11 @@ class GameboardService(object):
     def get_gameboard_state(self):
         return self.gameboard.state
 
-    def is_next(self, piece, row, column):
-        piece_pos = piece.position
+    def get_max_rows(self):
+        return self.gameboard.max_rows
+
+    def get_max_columns(self):
+        return self.gameboard.max_columns
 
 
 

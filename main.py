@@ -1,4 +1,9 @@
-from game import game
+from game import game, debug
+import sys
 
 if __name__ == '__main__':
-    game()
+
+    if sys.argv[0].upper() == "DEBUG":
+        debug()
+    else:
+        game()

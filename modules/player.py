@@ -1,4 +1,7 @@
 from modules.piece import Piece
+from services.state_checker import StateChecker
+from services.gameboard_service import GameboardService
+
 
 class Player(object):
     starting_pieces = 9
@@ -24,6 +27,20 @@ class Player(object):
     @property
     def piece_color(self):
         return self._piece_color
+
+    @property
+    def fly_mode(self):
+        return self.pieces_left <= 3
+
+    @property
+    def number_of_pieces_in_mill(self):
+        number_of_pieces_in_mill = 0
+        gbstate = GameboardService().get_gameboard_state()
+        for piece in self.piece_list:
+            if StateChecker.is_piece_in_mill(gbstate, piece.position.row, piece.position.column):
+                number_of_pieces_in_mill += 1
+        return number_of_pieces_in_mill
+
 
 
 

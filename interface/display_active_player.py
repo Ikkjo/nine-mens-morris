@@ -10,7 +10,7 @@ def display_active_player():
 
     player2_type = players.player2.type
     player2 = {"human": "Player 2",
-               "bor": "Bot"}
+               "bot": "Bot"}
 
     if active == players.player1:
         player1 = green + "Player 1" + end

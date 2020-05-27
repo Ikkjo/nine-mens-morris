@@ -20,3 +20,17 @@ def game():
 
         winner = play_game(mode)
         display_winner(winner)
+
+
+def debug():
+    while True:
+
+        clear_screen()
+
+        mode = starting_menu()
+
+        if mode is None:
+            return
+
+        winner = play_game(mode)
+        display_winner(winner)

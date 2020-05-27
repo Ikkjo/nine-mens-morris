@@ -59,11 +59,6 @@ class PlayerService(object):
             return PlayerService._remove_piece(players.player1, gbs.gameboard.state, row, column)
 
 
-
-
-
-
-
     @staticmethod
     def _remove_piece(player, gameboard_state, row, column):
         piece_counter = 0
@@ -76,3 +71,21 @@ class PlayerService(object):
             piece_counter += 1
 
         return removed
+
+    @staticmethod
+    def move_piece(from_pos, to_pos):
+        from_row = from_pos[0]
+        from_column = from_pos[1]
+        to_row = to_pos[0]
+        to_column = to_pos[1]
+
+        active_player = ActivePlayer().player
+        gbstate = GameboardService().get_gameboard_state()
+
+        from_pos = gbstate[from_row][from_column]
+        to_pos = gbstate[to_row][to_column]
+
+        from_pos_piece = from_pos.piece
+        from_pos_piece.position = to_pos
+        gbstate[to_row][to_column].piece = from_pos_piece
+

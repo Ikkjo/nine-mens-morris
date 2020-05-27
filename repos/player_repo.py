@@ -8,6 +8,7 @@ class PlayerRepo(object, metaclass=Singleton):
         self._player1 = player1
         self._player2 = player2
 
+    @property
     def players(self):
         return [self._player1, self._player2]
 
