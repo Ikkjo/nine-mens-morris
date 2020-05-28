@@ -1,15 +1,21 @@
 from services.gameboard_service import GameboardService
 from repos.active_player import ActivePlayer
+from modules.position import Position
 
 
 class StateChecker(object):
 
     @staticmethod
-    def check_mills(board_state, last_moved_position):
-        lmp_row = last_moved_position[0]
-        lmp_column = last_moved_position[1]
+    def check_mill(board_state, last_moved_position):
+        if isinstance(last_moved_position, tuple):
+            lmp_row = last_moved_position[0]
+            lmp_column = last_moved_position[1]
+        elif isinstance(last_moved_position, Position):
+            lmp_row = last_moved_position.row
+            lmp_column = last_moved_position.column
+
         position = board_state[lmp_row][lmp_column]
-        position_type = position.position_type
+        position_type = position.position_type()
 
         if position_type == "corner":
             return StateChecker._corner_mill_check(position)
@@ -121,7 +127,7 @@ class StateChecker(object):
     @staticmethod
     def is_piece_in_mill(gameboard_state, row: int, column: int):
         position = (row, column)
-        return StateChecker.check_mills(gameboard_state, position)
+        return StateChecker.check_mill(gameboard_state, position)
 
     @staticmethod
     def is_piece_color_equal(gameboard_state, row, column, piece_color):

@@ -37,7 +37,15 @@ class GameboardService(object):
     def get_max_columns(self):
         return self.gameboard.max_columns
 
+    def is_empty(self):
+        empty = True
 
+        for row in self.gameboard.state:
+            for position in row:
+                if position.piece != 'o':
+                    empty = False
+
+        return empty
 
 if __name__ == '__main__':
     gbs = GameboardService()

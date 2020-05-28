@@ -14,7 +14,7 @@ def play(play_mode, finishing_condition):
         display_active_player()
         mill = play_mode()
 
-        if mill:
+        if mill and ActivePlayer().player.type == "human":
             play_mill()
         change_active_player()
 

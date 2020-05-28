@@ -6,8 +6,8 @@ from repos.active_player import ActivePlayer
 from repos.player_repo import PlayerRepo
 
 
-def play_game(mode: str):
-    if initialize_game(mode) is False:
+def play_game(mode: str, debug=False):
+    if initialize_game(mode, debug) is False:
         return
     ActivePlayer(PlayerRepo().player1)
     play(initial_phase, init_finishing_condition)

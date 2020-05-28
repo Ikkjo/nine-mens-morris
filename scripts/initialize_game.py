@@ -4,9 +4,12 @@ from services.gameboard_service import GameboardService
 from services.player_service import PlayerService
 
 
-def initialize_game(mode):
+def initialize_game(mode, debug):
     GameboardService()
-    make_players(mode)
+    if not debug:
+        make_players(mode)
+    else:
+        bots_debug()
 
 
 def make_players(mode):
@@ -19,5 +22,11 @@ def make_players(mode):
 
     player1 = PlayerService.new_player("human", first_player_colour)
     player2 = PlayerService.new_player(mode, second_player_colour)
+
+    PlayerRepo(player1, player2)
+
+def bots_debug():
+    player1 = PlayerService.new_player("bot", "W")
+    player2 = PlayerService.new_player("bot", "B")
 
     PlayerRepo(player1, player2)

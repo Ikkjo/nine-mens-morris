@@ -14,14 +14,12 @@ def get_mill_position(player_type):
     if player_type == "human":
         return get_human_mill_position()
 
-    elif player_type == "bot":
-        return get_bot_mill_position()
+
 
 
 def get_human_mill_position():
     return mill_menu()
 
 
-def get_bot_mill_position():
-    pass
+
 

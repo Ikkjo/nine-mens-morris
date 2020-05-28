@@ -29,7 +29,6 @@ class Position(object):
         return {"up": self.up, "down": self.down, "left": self.left, "right": self.right}
 
     # Method below (piece_type) may not be needed
-    @property
     def position_type(self):
         """Method for defining piece type
 
@@ -69,3 +68,41 @@ class Position(object):
             raise TypeError("Type of piece error (number of next positions is invalid)!")
 
         return p_type
+
+    @property
+    def has_up(self):
+        return self.up is not None
+
+    @property
+    def has_down(self):
+        return self.down is not None
+
+    @property
+    def has_left(self):
+        return self.left is not None
+
+    @property
+    def has_right(self):
+        return self.right is not None
+
+    def has(self, direction):
+        directions = {"up": self.up is not None,
+                      "down": self.down is not None,
+                      "left": self.left is not None,
+                      "right": self.right is not None}
+
+        return directions[direction]
+
+    @property
+    def is_blocked(self):
+        next_positions = []
+        for direction in self.next.keys():
+            if self.next[direction] is not None:
+                next_positions.append(self.next[direction])
+
+        for adjacent in next_positions:
+            if adjacent.piece == 'o':
+                return False
+
+        return True
+

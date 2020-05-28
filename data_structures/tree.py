@@ -14,6 +14,9 @@ class TreeNode(object):
     def __ne__(self, other):
         return self != other
 
+    def __str__(self):
+        return "data: " + str(self._data) + "parent: " + str(self._parent) + "children: " + str(len(self._children))
+
     @property
     def parent(self):
         return self._parent
@@ -45,6 +48,9 @@ class TreeNode(object):
     def iterate_children(self, node):
         for child in node.children:
             yield child
+
+    def cut_children(self):
+        self._children = []
 
 
 class Tree(object):

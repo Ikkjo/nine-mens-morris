@@ -2,6 +2,7 @@ from services.player_service import PlayerService
 from scripts.human_init import human_init
 from scripts.human_move import human_move
 from bot.bot_init import bot_init
+from bot.bot_hardcoded import bot_random_place
 
 def next_move(active_player, move_mode): # move_mode can be INIT, MILL or MOVE
     moved_position = move(active_player, move_mode)
