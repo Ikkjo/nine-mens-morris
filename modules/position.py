@@ -25,6 +25,11 @@ class Position(object):
             return True
 
     @property
+    def coordinates(self):
+        coordinates = (self.row, self.column)
+        return coordinates
+
+    @property
     def next(self):
         return {"up": self.up, "down": self.down, "left": self.left, "right": self.right}
 
