@@ -9,7 +9,7 @@ def mill_menu():
     draw_gameboard()
     display_active_player()
     while True:
-        position = input("Mill! Choose which piece you want to remove ([A-G][1-7]\n>>>")
+        position = input("Mill! Choose which piece you want to remove ([A-G][1-7]\n>>>").upper()
         try:
             return check_mill_input_and_convert_position(position)
 

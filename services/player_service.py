@@ -2,6 +2,7 @@ from modules.player import HumanPlayer, BotPlayer
 from repos.active_player import ActivePlayer
 from services.gameboard_service import GameboardService
 from repos.player_repo import PlayerRepo
+from copy import deepcopy
 
 
 class PlayerService(object):
@@ -88,4 +89,54 @@ class PlayerService(object):
         from_pos_piece = from_pos.piece
         from_pos_piece.position = to_pos
         gbstate[to_row][to_column].piece = from_pos_piece
+
+    @staticmethod
+    def update_board(new_board_state):
+
+        old_board = GameboardService().gameboard
+
+        rows = range(old_board.max_rows)
+        columns = range(old_board.max_columns)
+
+        for row in rows:
+            for column in columns:
+                old_position = old_board.state[row][column]
+                new_position = new_board_state[row][column]
+
+                if old_position != new_position:
+                    PlayerService._replace(old_position, new_position, old_board)
+
+    @staticmethod
+    def _replace(old_position, new_position, board):
+        players = PlayerRepo()
+        player1 = players.player1
+        player2 = players.player2
+
+        if old_position.piece != 'o':
+            if player1.piece_color == old_position.piece:
+                PlayerService._remove_piece(player1, board, old_position.row, old_position.column)
+
+            elif player2.piece_color == old_position.piece:
+                PlayerService._remove_piece(player2, board, old_position.row, old_position.column)
+
+        if new_position.piece != 'o':
+            if player1.piece_color == new_position.piece:
+                player1.piece_list.append(new_position.piece)
+                if len(player1.unused_pieces) != 0:
+                    player1.unused_pieces.pop()
+
+            elif player2.piece_color == new_position.piece:
+                player2.piece_list.append(new_position.piece)
+                if len(player2.unused_pieces) != 0:
+                    player2.unused_pieces.pop()
+
+        old_position.piece = new_position.piece
+
+
+
+
+
+
+
+
 

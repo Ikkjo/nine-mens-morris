@@ -7,9 +7,9 @@ from data_structures.hash_map import HashMap
 
 
 def best_move(mode, board_state, player_color):  # Mode can be "INIT", "MILL" or "MOVE"
-    depth_dict = {"INIT": 3, "MOVE": 4, "FLY": 3}
+    depth_dict = {"INIT": 1, "MOVE": 4, "FLY": 3}
 
-    node_data = dict()  # HashMap()
+    node_data = dict()
     node_data["board_state"] = board_state
     node_data["player_color"] = player_color
     node_data["mode"] = mode
@@ -22,10 +22,11 @@ def best_move(mode, board_state, player_color):  # Mode can be "INIT", "MILL" or
     row = best_next_move.last_played_move.row
     column = best_next_move.last_played_move.column
     best_move_position = (row, column)
+    best_move_board = best_next_move.board_state
 
 
 
-    return best_move_position
+    return best_move_position, best_move_board
 
 
 

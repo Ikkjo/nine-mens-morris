@@ -15,19 +15,11 @@ def board_state_eval(best_move, player_color, mode):
                   "MOVE": [16, 43, 11, 8, 7, 42, 1086],
                   "FLY": [10, 1, 16, 1190]}
 
-    init_checking_functions = [closed_morris, morrises_number, blocked_number, pieces_number, two_piece_number,
-                               configs]
-
-    move_checking_functions = [closed_morris, morrises_number, blocked_number, pieces_number, opened_morris,
-                               double_morris, winning_configuration]
-
-    fly_checking_functions = [two_piece_number, configs, closed_morris, winning_configuration]
-
     evaluation = 0
 
     if mode == "INIT":
         init_coefs = phase_coefs["INIT"]
-        config_nums = configs(board_state, player_color, last_played_move)
+        config_nums = configs(board_state, player_color, move_phase=False)
         closed_m = closed_morris(board_state, player_color, last_played_move)*init_coefs[0]
         morris_num = config_nums["morrises"] * init_coefs[1]
         blocked_num = blocked_number(board_state, player_color)*init_coefs[2]
@@ -64,6 +56,7 @@ def board_state_eval(best_move, player_color, mode):
 
 
 def closed_morris(board_state, player_color, last_played_move):
+
     closed_morris = 0
 
     if StateChecker().check_mill(board_state, last_played_move):
@@ -72,47 +65,12 @@ def closed_morris(board_state, player_color, last_played_move):
         else:
             closed_morris -= 1
 
+
     return closed_morris
 
-
-def morrises_number(board_state, player_color):
-    number_of_morrises = 0
-
-    positions = [{"row": 0, "column": 1},
-                 {"row": 1, "column": 1},
-                 {"row": 2, "column": 1},
-                 {"row": 3, "column": 0},
-                 {"row": 3, "column": 1},
-                 {"row": 3, "column": 2},
-                 {"row": 4, "column": 0},
-                 {"row": 4, "column": 1},
-                 {"row": 4, "column": 2},
-                 {"row": 5, "column": 1},
-                 {"row": 6, "column": 1},
-                 {"row": 7, "column": 1}]
-
-    for position in positions:
-        row = position["row"]
-        column = position["column"]
-
-        pos = board_state[row][column]
-
-        if pos.piece == "o":
-            continue
-
-        elif StateChecker().check_mill(board_state, pos):
-
-            if pos.piece == player_color:
-                morris = 1
-            else:
-                morris = -1
-
-            number_of_morrises += morris
-
-    return number_of_morrises
-
-
 def blocked_number(board_state, player_color):
+
+
 
     blocked_pieces = 0
 
@@ -130,6 +88,9 @@ def blocked_number(board_state, player_color):
 
 
 def pieces_number(board_state, player_color):
+
+
+
     rows = range(len(board_state))
     columns = range(len(board_state[0]))
 
@@ -148,51 +109,22 @@ def pieces_number(board_state, player_color):
             elif board_state[row][column].piece.piece_color == oponents_color:
                 difference -= 1
 
+
+
     return difference
 
-
-def two_piece_number(board_state, player_color, last_played_move):
-    rows = range(len(board_state))
-    columns = range(len(board_state[0]))
-
-    oponents_color = 'W' if player_color == 'B' else 'B'
-    delta = 0
-
-    for row in rows:
-        for column in columns:
-            position = board_state[row][column]
-            for direction in position.next.keys():
-                if position.has(direction):
-                    next_pos = position.next[direction]
-                    has_next = next_pos.has(direction)
-                    found = False
-                    while has_next:
-                        found = position == next_pos
-                        next_pos = next_pos.next[direction]
-                        has_next = next_pos.has(direction)
-
-                    if found:
-                        if position.piece == player_color:
-                            delta += 1
-                        elif position.piece == oponents_color:
-                            delta -= 1
-
-    return delta
-
-
 def configs(board_state, player_color, move_phase=False):
-
     opponent_color = "W" if player_color == "B" else "B"
 
-    config_nums = {"three_piece": 0, "two_piece":0, "double_morrises":0, "morrises": 0}
+    config_nums = {"three_piece": 0, "two_piece":0, "double_morrises":0, "morrises": 0, "pieces_num": 0}
 
     #  I cry every time I see this
 
     number = {player_color: 1,
               opponent_color: -1}
 
-    visited_two_piece = set()
-    visited_morrrises = set()
+    visited_two_piece = []
+    visited_morrrises = []
 
     vertical_positions = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 2), (5, 1)]
 
@@ -213,70 +145,76 @@ def configs(board_state, player_color, move_phase=False):
 
         if vertical_position.piece == lower.piece and not isinstance(vertical_position.piece, str):
             config_nums["two_piece"] += number[vertical_position.piece.piece_color]
-            visited_two_piece.add(frozenset({vertical_position.coordinates, lower.coordinates}))
+            visited_two_piece.append(vertical_position)
+            visited_two_piece.append(lower)
+
 
 
         if vertical_position.piece == lowest.piece and not isinstance(vertical_position.piece, str):
-            if {vertical_position.coordinates, lower.coordinates} not in visited_two_piece:
+            if lower not in visited_two_piece and vertical_position not in visited_two_piece:
                 config_nums["two_piece"] += number[vertical_position.piece.piece_color]
-                visited_two_piece.add(frozenset({vertical_position.coordinates, lowest.coordinates}))
+                visited_two_piece.append(vertical_position)
+                visited_two_piece.append(lowest)
 
 
             else:
-                visited_two_piece.add(frozenset({vertical_position.coordinates, lowest.coordinates}))
-                visited_morrrises.add(frozenset({vertical_position.coordinates, lower.coordinates, lowest.coordinates}))
+                visited_two_piece.append(lowest)
+                visited_morrrises.append(vertical_position)
+                visited_morrrises.append(lower)
+                visited_morrrises.append(lowest)
                 config_nums["two_piece"] += number[vertical_position.piece.piece_color]
                 config_nums["morrises"] += number[vertical_position.piece.piece_color]
 
+
         if left.piece == middle.piece and not isinstance(left.piece, str):
             config_nums["two_piece"] += number[left.piece.piece_color]
-            visited = frozenset({left.coordinates, middle.coordinates})
-            visited_two_piece.add(visited)
+            visited_two_piece.append(left)
+            visited_two_piece.append(middle)
 
 
         if left.piece == right.piece and not isinstance(left.piece, str):
-            if {left.coordinates, middle.coordinates} not in visited_two_piece:
+            if left not in visited_two_piece and middle not in visited_two_piece:
                 config_nums["two_piece"] += number[left.piece.piece_color]
-                visited_two_piece.add(frozenset({left.coordinates, right.coordinates}))
+                visited_two_piece.append(left)
+                visited_two_piece.append(right)
 
 
             else:
-                visited_two_piece.add(frozenset({left.coordinates, right.coordinates}))
-
+                visited_two_piece.append(lowest)
+                visited_morrrises.append(vertical_position)
+                visited_morrrises.append(lower)
+                visited_morrrises.append(lowest)
                 config_nums["two_piece"] += number[left.piece.piece_color]
                 config_nums["morrises"] += number[left.piece.piece_color]
 
-    three_piece = count_double_config(visited_two_piece, player_color, opponent_color, board_state)
-    config_nums["three_piece"] += three_piece
+    # Temporary fix
+    # three_piece = count_triple_config(visited_two_piece, player_color, opponent_color, board_state,
+    #                                  visited_morris=visited_morrrises)
+    # config_nums["three_piece"] += three_piece
 
     if move_phase:
-        double = count_double_config(visited_morrrises, player_color, opponent_color, board_state)
-        config_nums["double_morrises"] += double
+        double_morrises = count_triple_config(visited_morrrises, player_color, opponent_color, board_state)
+        config_nums["double_morrises"] += double_morrises
 
     return config_nums
 
 
-def count_double_config(visited_two_piece, player_color, oponent_color, board_state):
+def count_triple_config(visited_two_piece, player_color, opponent_color, board_state, visited_morris=[]):
 
-    double = 0
+    triple = 0
 
     if len(visited_two_piece) != 0:
         number = {player_color: 1,
-                  oponent_color: -1}
-        for morris in visited_two_piece:
-            compare = visited_two_piece - {morris}
+                  opponent_color: -1}
+        for position in visited_two_piece:
+            compare = visited_two_piece.remove(position)
 
-            for cmp_morris in compare:
-                intersection = morris & cmp_morris
-                if len(intersection) == 1:
-                    position = list(intersection)[0]
-                    pos_row = position[0]
-                    pos_column = position[1]
-                    if board_state[pos_row][pos_column].piece != 'o':
-                        if board_state[pos_row][pos_column].piece.piece_color in number:
-                            double += number[board_state[pos_row][pos_column].piece.piece_color]
+            if position not in compare and position not in visited_morris:
+                color = position.piece.piece_color
+                triple += number[color]
 
-    return double
+
+    return triple
 
 
 def opened_morris(board_state, player_color, moved_from_pos):
@@ -305,7 +243,7 @@ def double_morris(board_state, player_color, last_played_move):
 
     return double
 
-def winning_configuration(board_state, player_color, last_played_move):
+def winning_configuration(board_state, player_color):
     oponents_color = "W" if player_color == "B" else "B"
     your_pieces = 0
     oponents_pieces = 0
@@ -327,7 +265,3 @@ def winning_configuration(board_state, player_color, last_played_move):
         winning -= 1
 
     return winning
-
-
-
-

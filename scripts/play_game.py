@@ -1,4 +1,5 @@
-from scripts.initial_phase import initial_phase, init_finishing_condition
+from scripts.initial_phase import initial_phase
+from scripts.init_finishing_condition import init_finishing_condition
 from scripts.move_phase import move_phase, move_finishing_condition
 from scripts.initialize_game import initialize_game
 from scripts.play import play

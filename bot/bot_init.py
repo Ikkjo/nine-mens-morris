@@ -12,14 +12,16 @@ def bot_init():
     players = PlayerRepo()
     if players.player1.pieces_left <= 1 and players.player2.pieces_left <= 1:  #  INIT Hardcoding
         position = bot_random_place()
+        row = position[0]
+        column = position[1]
+        PlayerService.place_piece(row, column)
+
     else:
         board_state = deepcopy(GameboardService().get_gameboard_state())
         player_color = None
         if ActivePlayer().player.type == "bot":
             player_color = ActivePlayer().piece_color
-        position = best_move("INIT", board_state, player_color)
+        position, best_board = best_move("INIT", board_state, player_color)
+        PlayerService.update_board(best_board)
 
-    row = position[0]
-    column = position[1]
-    PlayerService.place_piece(row, column)
     return position

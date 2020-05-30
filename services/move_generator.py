@@ -4,6 +4,7 @@ from modules.piece import Piece
 from data_structures.tree import TreeNode
 from copy import deepcopy
 from data_structures.hash_map import HashMap
+from scripts.init_finishing_condition import do_players_have_unused_pieces
 
 
 class MoveGenerator(object):
@@ -13,6 +14,7 @@ class MoveGenerator(object):
         valid_moves = MoveGenerator._get_valid_moves(node)
         for position in valid_moves:
             node = MoveGenerator._add_move_to_node(node, position)
+
 
         return node
 
@@ -40,7 +42,8 @@ class MoveGenerator(object):
     @staticmethod
     def _valid_move(position, mode, player_color):
         if mode == "INIT":
-            if position.piece == 'o':
+            finishing_condition = do_players_have_unused_pieces()
+            if position.piece == 'o' and finishing_condition:
                 return True
 
         elif mode == "MOVE":
@@ -69,6 +72,7 @@ class MoveGenerator(object):
                     position_copy = deepcopy(position)
                     new_state = MoveGenerator._mill(mode, board_copy, oponent_position, position_copy, player_color)
                     new_node = MoveGenerator._mill_node(mode, player_color, new_state, position_copy)
+                    new_node.parent = node
                     node.children.append(new_node)
             else:
 
